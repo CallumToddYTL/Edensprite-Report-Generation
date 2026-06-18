@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Report Generator</title>
+
+    <link rel="stylesheet" href="../assets/css/global.css">
+</head>
+<body class="login-page">
+
+    <main class="login-wrapper">
+
+        <section class="login-header">
+            <img src="../assets/images/logo.png" alt="Edensprite Logo" class="login-logo">
+
+            <h1>Welcome Back</h1>
+            <p>Please sign in to continue.</p>
+        </section>
+
+        <section class="login-card">
+
+            <% if (error) { %>
+                <div class="error-message">
+                    <%= error %>
+                </div>
+            <% } %>
+
+            <form action="/login" method="POST">
+
+                <div class="form-group">
+                    <label>Email Address</label>
+
+                    <div class="input-row">
+                        <span class="input-icon">👤</span>
+
+                        <input
+                            type="email"
+                            name="email"
+                            required
+                            autocomplete="email"
+                        >
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Password</label>
+
+                    <div class="input-row">
+                        <span class="input-icon">🔒</span>
+
+                        <input
+                            type="password"
+                            name="password"
+                            required
+                            autocomplete="current-password"
+                        >
+                    </div>
+                </div>
+
+                <div class="login-footer">
+
+                    <span class="forgot-text">
+                        Forgot password? Please contact an administrator.
+                    </span>
+
+                    <button type="submit" class="login-button">
+                        Sign In
+                    </button>
+
+                </div>
+
+            </form>
+
+        </section>
+
+        <p class="no-account">
+            Accounts must be created by an administrator.
+        </p>
+
+    </main>
+
+</body>
+</html>

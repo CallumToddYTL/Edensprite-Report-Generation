@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Past Reports | Report Generator</title>
+
+    <link rel="stylesheet" href="../assets/css/global.css">
+</head>
+<body>
+
+<header class="topbar">
+
+    <div class="logo">
+        <img src="../assets/images/logo.png" alt="Logo">
+    </div>
+
+    <div class="header-right">
+
+        <span class="user-email">
+            <%= user.email %>
+        </span>
+
+        <button id="menuToggle" class="menu-button">
+            ☰
+        </button>
+
+        <div id="dropdownMenu" class="dropdown hidden">
+            <a href="/dashboard">Dashboard</a>
+            <a href="/reports">Past Reports</a>
+
+            <form action="/logout" method="POST">
+                <button type="submit">Sign Out</button>
+            </form>
+        </div>
+
+    </div>
+
+</header>
+
+<main class="dashboard-container">
+
+    <section class="welcome">
+        <h1>Past Reports</h1>
+
+        <p>
+            View and download previously generated report files.
+        </p>
+    </section>
+
+    <section class="recent-reports full-width">
+
+        <% if (!reports || reports.length === 0) { %>
+
+            <div class="empty-state">
+                No reports available.
+            </div>
+
+        <% } else { %>
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Report Name</th>
+                        <th>Created / Modified</th>
+                        <th>Download</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <% reports.forEach(report => { %>
+
+                        <tr>
+
+                            <td>
+                                <%= report.file_name %>
+                            </td>
+
+                            <td>
+                                <%= report.created_at || "N/A" %>
+                            </td>
+
+                            <td>
+                                <a
+                                    href="<%= report.download_url %>"
+                                    class="download-link"
+                                >
+                                    Download
+                                </a>
+                            </td>
+
+                        </tr>
+
+                    <% }) %>
+
+                </tbody>
+
+            </table>
+
+        <% } %>
+
+    </section>
+
+</main>
+
+<script src="../assets/js/menu.js"></script>
+
+</body>
+</html>

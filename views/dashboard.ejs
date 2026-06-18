@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Report Generator</title>
+
+    <link rel="stylesheet" href="../assets/css/global.css">
+</head>
+<body>
+
+<header class="topbar">
+
+    <div class="logo">
+        <img src="../assets/images/logo.png" alt="Logo" class="header-logo">
+    </div>
+
+    <div class="header-right">
+
+        <span class="user-email">
+            <%= user.email %>
+        </span>
+
+        <button id="menuToggle" class="menu-button">
+            ☰
+        </button>
+
+        <div id="dropdownMenu" class="dropdown hidden">
+            <a href="/dashboard">Dashboard</a>
+            <a href="/reports">Past Reports</a>
+
+            <form action="/logout" method="POST">
+                <button type="submit">Sign Out</button>
+            </form>
+        </div>
+
+    </div>
+
+</header>
+
+<main class="dashboard-container">
+
+    <section class="welcome">
+        <h1>Welcome Back</h1>
+        <p>
+            Generate telemetry reports and access previous report outputs.
+        </p>
+    </section>
+
+    <div class="dashboard-grid">
+
+        <section class="report-generator">
+
+            <h2>Generate Report</h2>
+
+            <form action="/generate-report" method="POST">
+
+                <div class="form-group">
+                    <label>Select Project</label>
+
+                    <select name="project" required>
+
+                        <option value="">
+                            Select Project
+                        </option>
+
+                        <% projects.forEach(project => { %>
+
+                            <option value="<%= project.id %>">
+                                <%= project.account_name %>
+                            </option>
+
+                        <% }) %>
+
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Start Date</label>
+
+                    <input
+                        type="date"
+                        name="startDate"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label>End Date</label>
+
+                    <input
+                        type="date"
+                        name="endDate"
+                        required
+                    >
+                </div>
+
+                <button
+                    type="submit"
+                    class="generate-btn"
+                >
+                    Generate Report
+                </button>
+
+            </form>
+
+        </section>
+
+        <section class="recent-reports">
+
+            <h2>Recent Reports</h2>
+
+            <% if (!reports || reports.length === 0) { %>
+
+                <div class="empty-state">
+                    No reports found.
+                </div>
+
+            <% } else { %>
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>Report</th>
+                            <th>Date</th>
+                            <th>Download</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        <% reports.forEach(report => { %>
+
+                            <tr>
+
+                                <td>
+                                    <%= report.file_name %>
+                                </td>
+
+                                <td>
+                                    <%= report.created_at || "N/A" %>
+                                </td>
+
+                                <td>
+                                    <a
+                                        href="<%= report.download_url %>"
+                                        class="download-link"
+                                    >
+                                        Download
+                                    </a>
+                                </td>
+
+                            </tr>
+
+                        <% }) %>
+
+                    </tbody>
+
+                </table>
+
+            <% } %>
+
+        </section>
+
+    </div>
+
+</main>
+
+<script src="../assets/js/menu.js"></script>
+
+</body>
+</html>

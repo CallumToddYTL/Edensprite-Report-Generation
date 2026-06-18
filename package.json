@@ -1,0 +1,24 @@
+{
+  "name": "edensprite-report-generation",
+  "version": "1.0.0",
+  "description": "Front-end code for the generation of PDF reports from stored data on Edensprite's database.",
+  "homepage": "https://github.com/CallumToddYTL/Edensprite-Report-Generation#readme",
+  "bugs": {
+    "url": "https://github.com/CallumToddYTL/Edensprite-Report-Generation/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CallumToddYTL/Edensprite-Report-Generation.git"
+  },
+  "license": "ISC",
+  "author": "Callum Todd",
+  "type": "commonjs",
+  "main": "app.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "start": "node app.js",
+    "test": "jest"
+  }
+}
