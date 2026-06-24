@@ -11,6 +11,8 @@ const db = new sqlite3.Database(
     "./database_temp/database/assessment.sqlite"
 );
 
+const port = process.env.PORT || 3000;
+
 // View Engine
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
@@ -57,13 +59,13 @@ app.use((req, res) => {
 });
 
 // Start Server
-app.listen(3000, () => {
-    console.log("Running on http://localhost:3000");
+app.listen(port, () => {
+    console.log(`Running on http://localhost:${port}`);
 });
 
 if (require.main === module) {
-    app.listen(3000, () => {
-        console.log("Running on http://localhost:3000");
+    app.listen(port, () => {
+        console.log(`Running on http://localhost:${port}`);
     });
 }
 
